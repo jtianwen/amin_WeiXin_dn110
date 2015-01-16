@@ -1,5 +1,5 @@
 <?php
-	require_once("./configuration.php");	//引入配置常量文件
+	require_once("configuration.php");	//引入配置常量文件
 	//data_default_timezone_set(TIMEZONE);
 	
 	/**
@@ -94,6 +94,15 @@
             $id = mysql_insert_id($this->conn);
             $this->close();
             return $id;
+        }
+        /**
+         * 获取表中所有数据
+         */
+        public function getAllData($tableName){
+            @$data = $this->getObjListBySql("SELECT * FROM ".$tableName);
+            
+            if(count($data)!=0)return $data;
+            return NULL;   
         }
         /**
          * 通过表中的某一属性获取数据
